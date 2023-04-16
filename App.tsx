@@ -1,25 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as Font from 'expo-font';
+import { useEffect, useState } from 'react';
 
-import { Button } from './src/components/Button';
+import { Fonts } from './assets/fonts';
+import { LoadingSpinner } from './src/components/LoadingSpinner';
+import { Splash } from './src/screens/Splash';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <Button>
-        <Text>Click me</Text>
-      </Button>
-    </View>
-  );
-}
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  useEffect(() => {
+    async function loadFonts() {
+      await Font.loadAsync({ ...Fonts });
+      setFontsLoaded(true);
+    }
+
+    loadFonts();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <LoadingSpinner />;
+  }
+
+  return <Splash />;
+}
