@@ -10,9 +10,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   header: {
-    display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 104,
   },
   logo: {
@@ -20,10 +18,10 @@ export const styles = StyleSheet.create({
     height: 79,
   },
   title: {
+    fontFamily: FONTS.poppinsSemiBold,
     color: COLOR_SCHEME.white,
     marginTop: 14,
     fontSize: 18,
-    fontFamily: FONTS.poppinsSemiBold,
     textAlign: 'center',
     fontWeight: '500',
   },
@@ -33,15 +31,15 @@ export const styles = StyleSheet.create({
   },
   bodyTitle: {
     fontFamily: FONTS.poppinsSemiBold,
-    fontSize: 50,
     color: COLOR_SCHEME.white,
-    maxWidth: '60%',
+    fontSize: 50,
+    maxWidth: '70%',
     textAlign: 'center',
   },
   bodySubTitle: {
     fontFamily: FONTS.poppins,
-    fontSize: 16,
     color: COLOR_SCHEME.white,
+    fontSize: 16,
     marginBottom: 64,
     marginTop: 20,
   },

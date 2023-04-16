@@ -1,11 +1,13 @@
+import React from 'react';
 import { Image, ImageBackground, Text, View } from 'react-native';
 
 import { CustomButton } from '../../components/Button';
 import { styles } from './styles';
+import { SplashScreenNavigationProp } from '../../constants';
 
-export const Splash = () => {
+export const Splash = React.memo(({ navigation }: { navigation: SplashScreenNavigationProp }) => {
   const onPress = () => {
-    console.log('pressed');
+    navigation.navigate('Home');
   };
 
   return (
@@ -18,9 +20,8 @@ export const Splash = () => {
       <View style={styles.body}>
         <Text style={styles.bodyTitle}>Get Cooking</Text>
         <Text style={styles.bodySubTitle}>Simple way to find Tasty Recipe</Text>
-
         <CustomButton onPress={onPress}>Start cooking</CustomButton>
       </View>
     </ImageBackground>
   );
-};
+});
