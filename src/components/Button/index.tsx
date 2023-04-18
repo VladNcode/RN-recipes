@@ -1,4 +1,5 @@
-import { Text, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { Image, Text, TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 
@@ -7,11 +8,11 @@ interface ButtonProps {
   onPress: () => void;
 }
 
-export const CustomButton = ({ children, onPress }: ButtonProps) => {
+export const CustomButton = React.memo(({ children, onPress }: ButtonProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <Text style={styles.text}>{children}</Text>
       <Image source={require('../../../assets/arrowRight.png')} style={styles.arrow} />
     </TouchableOpacity>
   );
-};
+});

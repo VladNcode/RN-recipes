@@ -7,15 +7,15 @@ export const styles = StyleSheet.create({
     backgroundColor: COLOR_SCHEME.green,
     borderRadius: 10,
     padding: 15,
-    marginHorizontal: 66,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     minWidth: 243,
   },
   text: {
     color: COLOR_SCHEME.white,
-    fontSize: 16,
     fontFamily: FONTS.poppinsSemiBold,
+    fontSize: 16,
   },
   arrow: {
     width: 20,
