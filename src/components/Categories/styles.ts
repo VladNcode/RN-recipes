@@ -24,4 +24,7 @@ export const styles = StyleSheet.create({
   firstItem: {
     marginLeft: 24,
   },
+  firstItemNotSelected: {
+    marginLeft: 8,
+  },
 });

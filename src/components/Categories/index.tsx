@@ -20,7 +20,12 @@ export const Categories = React.memo(({ categories, selectedCategory, changeSele
         onPress={() => {
           changeSelectedCategory(item);
         }}>
-        <View style={[isSelected && styles.selected, index === 0 && styles.firstItem]}>
+        <View
+          style={[
+            isSelected && styles.selected,
+            index === 0 && styles.firstItem,
+            index === 0 && !isSelected && styles.firstItemNotSelected,
+          ]}>
           <Text style={[styles.item, isSelected && styles.selectedItem]}>{item}</Text>
         </View>
       </TouchableOpacity>
