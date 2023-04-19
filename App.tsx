@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as Font from 'expo-font';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet } from 'react-native';
 
 import { Fonts } from './assets/fonts';

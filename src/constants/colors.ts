@@ -5,4 +5,5 @@ export const COLOR_SCHEME = {
   lightGray2: '#A9A9A9',
   black: '#000000',
   gray: '#484848',
+  gold: '#FFAD30',
 };
