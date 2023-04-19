@@ -6,6 +6,7 @@ import { Input } from '../../components/Input';
 import { Title } from '../../components/Title';
 import { HomeScreenNavigationProp } from '../../constants';
 import { styles } from './styles';
+import { RecipeCard } from '../../components/RecipeCard';
 
 export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigationProp }) => {
   const onPress = () => {
@@ -22,7 +23,14 @@ export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigati
           navigation.navigate('Search');
         }}
       />
-      <Title text="Featured recipes" />
+      <Title extraTextStyle={styles.heading} text="Featured recipes" />
+      <RecipeCard
+        title="Steak with tomato sauce and bulgur rice."
+        time="20 mins"
+        author={{ name: 'James Milner', photo: 'https://www.themarysue.com/wp-content/uploads/2015/12/avatar.jpeg' }}
+        image="https://buffalorunranch.com/wp-content/uploads/2017/08/ribeye-1.jpg"
+        rating={4.5}
+      />
       <Categories
         categories={['All', 'Trending', 'Favorites', 'Delicios']}
         selectedCategory={selectedCategory}
