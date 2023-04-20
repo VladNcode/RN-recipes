@@ -8,5 +8,9 @@ export const styles = StyleSheet.create({
   heading: {
     fontFamily: FONTS.poppinsBold,
     fontSize: 16,
+    marginTop: 25,
+  },
+  list: {
+    marginHorizontal: -24,
   },
 });
