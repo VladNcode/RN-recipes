@@ -10,11 +10,12 @@ interface RecipeCardProps {
   author: { photo: string; name: string };
   rating: number;
   time: string;
+  isLastItem: boolean;
 }
 
-export const RecipeCard = React.memo(({ author, image, rating, time, title }: RecipeCardProps) => {
+export const RecipeCard = React.memo(({ author, image, rating, time, title, isLastItem }: RecipeCardProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isLastItem && styles.lastItem]}>
       <View style={styles.row}>
         <Text numberOfLines={1} style={styles.title}>
           {title}

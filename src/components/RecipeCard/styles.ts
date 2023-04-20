@@ -6,6 +6,7 @@ const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
+    marginLeft: 24,
     marginTop: 47,
     borderRadius: 10,
     backgroundColor: COLOR_SCHEME.white,
@@ -61,5 +62,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  lastItem: {
+    marginRight: 24,
   },
 });
