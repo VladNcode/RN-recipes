@@ -21,7 +21,7 @@ export const Rating = React.memo(({ rating }: RatingProps) => {
         image = require('../../../assets/emptyStar.png');
       }
 
-      return <Image style={styles.star} source={image} />;
+      return <Image key={star} style={styles.star} source={image} />;
     });
 
   return <View style={styles.container}>{renderStars()}</View>;
