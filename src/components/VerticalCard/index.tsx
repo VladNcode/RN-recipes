@@ -6,11 +6,11 @@ import { styles } from './styles';
 interface VerticalCard {
   image: string;
   title: string;
-  time: string;
+  servings: number;
   isLastItem: boolean;
 }
 
-export const VerticalCard = React.memo(({ image, title, time, isLastItem }: VerticalCard) => {
+export const VerticalCard = React.memo(({ image, title, servings, isLastItem }: VerticalCard) => {
   return (
     <View style={[styles.container, isLastItem && styles.lastItem]}>
       <Image source={{ uri: image }} style={styles.image} />
@@ -19,10 +19,14 @@ export const VerticalCard = React.memo(({ image, title, time, isLastItem }: Vert
         {title}
       </Text>
 
-      <View style={styles.footer}>
-        <Text style={styles.label}>Time</Text>
-        <Text style={styles.time}>{time}</Text>
-      </View>
+      {servings ? (
+        <View style={styles.footer}>
+          <Text style={styles.label}>Servings</Text>
+          <Text style={styles.time}>{servings}</Text>
+        </View>
+      ) : (
+        <View />
+      )}
     </View>
   );
 });
