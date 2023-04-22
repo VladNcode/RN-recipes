@@ -12,6 +12,10 @@ export const Search = React.memo(({ navigation }: { navigation: HomeScreenNaviga
   const { recipes } = useRecipesContext();
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(recipes);
 
+  const navigateToRecipe = (item: Recipe) => {
+    navigation.navigate('RecipeDetails', { item });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Input
@@ -33,6 +37,9 @@ export const Search = React.memo(({ navigation }: { navigation: HomeScreenNaviga
         renderItem={({ item, index }) => {
           return (
             <VerticalCard
+              onPress={() => {
+                navigateToRecipe(item);
+              }}
               image={item.thumbnail_url}
               title={item.name}
               servings={item.num_servings}

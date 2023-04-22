@@ -3,6 +3,7 @@ import { Image, Text, View } from 'react-native';
 
 import { Rating } from '../Rating';
 import { styles } from './styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface RecipeCardProps {
   title: string;
@@ -11,11 +12,12 @@ interface RecipeCardProps {
   rating?: number;
   time?: number;
   isLastItem: boolean;
+  onPress: () => void;
 }
 
-export const RecipeCard = React.memo(({ author, image, rating, time, title, isLastItem }: RecipeCardProps) => {
+export const RecipeCard = React.memo(({ author, image, rating, time, title, isLastItem, onPress }: RecipeCardProps) => {
   return (
-    <View style={[styles.container, isLastItem && styles.lastItem]}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, isLastItem && styles.lastItem]}>
       <View style={styles.row}>
         <Text numberOfLines={1} style={styles.title}>
           {title}
@@ -44,13 +46,13 @@ export const RecipeCard = React.memo(({ author, image, rating, time, title, isLa
           <View style={styles.row}>
             <Image source={require('../../../assets/timer.png')} style={styles.authorImage} />
             <Text numberOfLines={1} style={styles.footerText}>
-              {time} minutes
+              {time} mins
             </Text>
           </View>
         ) : (
           <View />
         )}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 });
