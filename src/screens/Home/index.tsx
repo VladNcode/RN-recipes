@@ -5,7 +5,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Categories, Input, RecipeCard, Title, VerticalCard } from '../../components';
 import { HomeScreenNavigationProp } from '../../constants';
 import { useHealthyRecipesContext, useRecipesContext } from '../../contexts';
-import { convertSnakeCaseToNormalCase } from '../../utils/utils';
+import { convertNormalCaseToSnakeCase, convertSnakeCaseToNormalCase } from '../../utils/utils';
 import { styles } from './styles';
 
 export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigationProp }) => {
@@ -31,12 +31,7 @@ export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigati
 
   return (
     <SafeAreaView style={styles.container}>
-      <Input
-        pressable
-        onPress={() => {
-          navigation.navigate('Search');
-        }}
-      />
+      <Input pressable onPress={onPress} />
       <Title extraTextStyle={styles.heading} text="Featured recipes" />
 
       <FlatList
@@ -66,7 +61,11 @@ export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigati
         showsHorizontalScrollIndicator={false}
         horizontal
         style={styles.list}
-        data={recipes}
+        data={
+          selectedTag === 'All'
+            ? recipes
+            : recipes.filter(recipe => recipe.tags.some(tag => tag.name === convertNormalCaseToSnakeCase(selectedTag)))
+        }
         renderItem={({ item, index }) => {
           return (
             <VerticalCard

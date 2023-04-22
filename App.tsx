@@ -59,7 +59,7 @@ export default function App() {
     loadFonts();
   }, []);
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded || !recipes.length || !healthyRecipes.length) {
     return <LoadingSpinner />;
   }
 
