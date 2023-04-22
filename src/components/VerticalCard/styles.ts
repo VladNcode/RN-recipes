@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     width: width * 0.393,
     marginVertical: 16,
     justifyContent: 'space-between',
+    minHeight: 160,
   },
   title: {
     color: COLOR_SCHEME.gray,

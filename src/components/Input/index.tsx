@@ -11,14 +11,28 @@ interface InputProps {
   style?: ViewStyle;
   showSearchIcon?: boolean;
   placeholder?: string;
+  autoFocus?: boolean;
+  onChangeText?: (text: string) => void;
 }
 
 export const Input = React.memo(
-  ({ onPress, pressable = false, style = {}, showSearchIcon = true, placeholder = 'Search recipe' }: InputProps) => {
+  ({
+    onPress,
+    pressable = false,
+    style = {},
+    showSearchIcon = true,
+    placeholder = 'Search recipe',
+    ...textInputProps
+  }: InputProps) => {
     const renderInput = (
       <View style={[styles.container, style]}>
         {showSearchIcon && <Image source={require('../../../assets/search.png')} style={styles.icon} />}
-        <TextInput editable={!pressable} placeholderTextColor={COLOR_SCHEME.lightGray} placeholder={placeholder} />
+        <TextInput
+          {...textInputProps}
+          editable={!pressable}
+          placeholderTextColor={COLOR_SCHEME.lightGray}
+          placeholder={placeholder}
+        />
       </View>
     );
 
