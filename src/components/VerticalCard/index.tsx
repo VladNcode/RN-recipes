@@ -2,17 +2,19 @@ import React from 'react';
 import { Image, Text, View } from 'react-native';
 
 import { styles } from './styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface VerticalCard {
   image: string;
   title: string;
   servings: number;
   isLastItem: boolean;
+  onPress: () => void;
 }
 
-export const VerticalCard = React.memo(({ image, title, servings, isLastItem }: VerticalCard) => {
+export const VerticalCard = React.memo(({ image, title, servings, isLastItem, onPress }: VerticalCard) => {
   return (
-    <View style={[styles.container, isLastItem && styles.lastItem]}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, isLastItem && styles.lastItem]}>
       <Image source={{ uri: image }} style={styles.image} />
 
       <Text numberOfLines={2} style={styles.title}>
@@ -27,6 +29,6 @@ export const VerticalCard = React.memo(({ image, title, servings, isLastItem }: 
       ) : (
         <View />
       )}
-    </View>
+    </TouchableOpacity>
   );
 });

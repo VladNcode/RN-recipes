@@ -28,6 +28,7 @@ export const Input = React.memo(
       <View style={[styles.container, style]}>
         {showSearchIcon && <Image source={require('../../../assets/search.png')} style={styles.icon} />}
         <TextInput
+          onPressIn={pressable ? onPress : undefined}
           {...textInputProps}
           editable={!pressable}
           placeholderTextColor={COLOR_SCHEME.lightGray}

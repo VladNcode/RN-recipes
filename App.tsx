@@ -12,7 +12,7 @@ import { LoadingSpinner } from './src/components/LoadingSpinner';
 import { COLOR_SCHEME, RootStackParamsList } from './src/constants';
 import { Recipe } from './src/constants/recipe.interface';
 import { HealthyRecipesContext, RecipesContext } from './src/contexts/contexts';
-import { Home, Search, Splash } from './src/screens';
+import { Home, RecipeDetails, Search, Splash } from './src/screens';
 
 const Stack = createStackNavigator<RootStackParamsList>();
 
@@ -45,11 +45,39 @@ export default function App() {
 
     const fetchData = async () => {
       try {
-        const response = await getRecipesList({ size: 15 });
-        const response2 = await getRecipesList({ tags: 'healthy', size: 5 });
+        const response = await getRecipesList({ size: 50 });
 
-        if (response.status === 200) setRecipes(response.data.results);
-        if (response2.status === 200) setHealthyRecipes(response2.data.results);
+        if (response.status === 200)
+          setRecipes(
+            response.data.results.filter(
+              recipe =>
+                recipe.instructions &&
+                recipe.instructions.length &&
+                Object.keys(recipe.nutrition || {}).length &&
+                recipe.num_servings,
+            ),
+          );
+
+        for (let i = 0; i < 10; i++) {
+          const healthyRecipesResponse = await getRecipesList({ tags: 'healthy', size: 250 });
+
+          if (healthyRecipesResponse.status === 200) {
+            const healthyRecipes = healthyRecipesResponse.data.results.filter(
+              recipe =>
+                recipe.instructions &&
+                recipe.instructions.length &&
+                Object.keys(recipe.nutrition || {}).length &&
+                recipe.total_time_minutes,
+            );
+
+            if (healthyRecipes.length) {
+              setHealthyRecipes(healthyRecipes.slice(0, 5));
+              break;
+            }
+
+            if (i === 9) throw Error('Could not fetch healthy recipes');
+          }
+        }
       } catch (error) {
         console.error(error);
       }
@@ -74,6 +102,15 @@ export default function App() {
               name="Search"
               component={Search}
               options={{
+                headerLeft: BackButton,
+                gestureEnabled: false,
+              }}
+            />
+            <Stack.Screen
+              name="RecipeDetails"
+              component={RecipeDetails}
+              options={{
+                title: 'Recipe Details',
                 headerLeft: BackButton,
                 gestureEnabled: false,
               }}

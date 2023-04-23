@@ -7,6 +7,7 @@ import { HomeScreenNavigationProp } from '../../constants';
 import { useHealthyRecipesContext, useRecipesContext } from '../../contexts';
 import { convertNormalCaseToSnakeCase, convertSnakeCaseToNormalCase } from '../../utils/utils';
 import { styles } from './styles';
+import { Recipe } from '../../constants/recipe.interface';
 
 export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigationProp }) => {
   const onPress = () => {
@@ -29,6 +30,10 @@ export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigati
     setTags([...tags].map(convertSnakeCaseToNormalCase));
   }, [recipes]);
 
+  const navigateToRecipe = (item: Recipe) => {
+    navigation.navigate('RecipeDetails', { item });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Input pressable onPress={onPress} />
@@ -43,9 +48,12 @@ export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigati
         renderItem={({ item, index }) => {
           return (
             <RecipeCard
+              onPress={() => {
+                navigateToRecipe(item);
+              }}
               isLastItem={index === healthyRecipes.length - 1}
               title={item.name}
-              time={item.cook_time_minutes}
+              time={item.total_time_minutes}
               image={item.thumbnail_url}
               rating={item.user_ratings?.score}
               author={{ name: item.credits[0]?.name, photo: item.credits[0]?.image_url }}
@@ -69,6 +77,9 @@ export const Home = React.memo(({ navigation }: { navigation: HomeScreenNavigati
         renderItem={({ item, index }) => {
           return (
             <VerticalCard
+              onPress={() => {
+                navigateToRecipe(item);
+              }}
               image={item.thumbnail_url}
               title={item.name}
               servings={item.num_servings}
