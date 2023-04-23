@@ -46,7 +46,6 @@ export default function App() {
     const fetchData = async () => {
       try {
         const response = await getRecipesList({ size: 50 });
-        const response2 = await getRecipesList({ tags: 'healthy', size: 30 });
 
         if (response.status === 200)
           setRecipes(
@@ -55,21 +54,30 @@ export default function App() {
                 recipe.instructions &&
                 recipe.instructions.length &&
                 Object.keys(recipe.nutrition || {}).length &&
-                recipe.total_time_minutes &&
                 recipe.num_servings,
             ),
           );
-        if (response2.status === 200)
-          setHealthyRecipes(
-            response2.data.results.filter(
+
+        for (let i = 0; i < 10; i++) {
+          const healthyRecipesResponse = await getRecipesList({ tags: 'healthy', size: 250 });
+
+          if (healthyRecipesResponse.status === 200) {
+            const healthyRecipes = healthyRecipesResponse.data.results.filter(
               recipe =>
                 recipe.instructions &&
                 recipe.instructions.length &&
                 Object.keys(recipe.nutrition || {}).length &&
-                recipe.total_time_minutes &&
-                recipe.num_servings,
-            ),
-          );
+                recipe.total_time_minutes,
+            );
+
+            if (healthyRecipes.length) {
+              setHealthyRecipes(healthyRecipes.slice(0, 5));
+              break;
+            }
+
+            if (i === 9) throw Error('Could not fetch healthy recipes');
+          }
+        }
       } catch (error) {
         console.error(error);
       }
